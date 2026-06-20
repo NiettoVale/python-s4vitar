@@ -1,5 +1,25 @@
 #!/usr/bin/env python3
-tope_ventas = 2500
+from time import sleep
+import os
+
+print("""
+====================================
+        🎮 GameInfo System
+====================================
+
+Bienvenido.
+Este sistema analiza ventas de videojuegos
+y genera reportes filtrados por un umbral.
+
+------------------------------------
+""")
+
+tope_ventas = int(input("Ingrese el tope de ventas: "))
+
+print("\n⏳ Procesando datos...\n")
+sleep(2)
+os.system('cls' if os.name == 'nt' else 'clear')
+
 juegos = [
     "Super Mario Bros",
     "Zelda: Breath of the Wild",
@@ -59,13 +79,31 @@ def sumario(juego):
     print(f"\t[+] Stock actual: {ventas_y_stock[juego][1]} unidades")
     print(f"\t[+] Clientes que adquirieron el juego: {', '.join(clientes[juego])}")
     
+# Encabezado reporte
+def encabezado_reporte():
+    print("\n" + "=" * 45)
+    print("📊 GAMEINFO - REPORTE DE VENTAS")
+    print("=" * 45)
+    print("\n🔎 Analizando juegos con ventas sobre el tope...\n")
+    
 # Punto de entrada
 def main():
+    encabezado_reporte()
+    
+    encontrados = False
+    
     for juego in juegos:
         if ventas_y_stock[juego][0] > tope_ventas:
             sumario(juego)
-        
-    print(f'\n[+] El total de ventas (sobre el tope) es de: {total_ventas_sobre_tope():,} unidades.'.replace(',', '.'))
+            encontrados = True
+    
+    if not encontrados:
+        print("No se encontraron juegos que superen el tope.\n")
+    
+    print("\n" + "-" * 45)
+    print(f"Total (sobre el tope): {total_ventas_sobre_tope():,} unidades")
+    print("-" * 45)
+    
     
 # Calcular el total de ventas de todos los juegos
 total_ventas_sobre_tope = lambda: sum(venta for juego, (venta,_) in ventas_y_stock.items() if ventas_y_stock[juego][0] > tope_ventas)
