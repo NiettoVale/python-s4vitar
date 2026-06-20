@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+tope_ventas = 2500
+juegos = [
+    "Super Mario Bros",
+    "Zelda: Breath of the Wild",
+    "Cyberpunk 2077",
+    "Final Fantasy VII",
+    "Elden Ring",
+    "Stardew Valley",
+    "Minecraft",
+    "Hollow Knight",
+    "Persona 5 Royal"
+]
 
 # Géneros
 generos = {
@@ -39,11 +51,24 @@ clientes = {
     "Persona 5 Royal": {"Securiters", "Ren", "Ana", "Pedro"}
 }
 
-mi_juego = "Minecraft"
-
 # Sumario
-print(f"\n[i] Resumen de \"{mi_juego}\"\n")
-print(f"\t[+] Genero: {generos[mi_juego]}")
-print(f"\t[+] Total de ventas: {ventas_y_stock[mi_juego][0]} unidades")
-print(f"\t[+] Stock actual: {ventas_y_stock[mi_juego][1]} unidades")
-print(f"\t[+] Clientes que adquirieron el juego: {', '.join(clientes[mi_juego])}")
+def sumario(juego):    
+    print(f"\n[i] Resumen de \"{juego}\"\n")
+    print(f"\t[+] Genero: {generos[juego]}")
+    print(f"\t[+] Total de ventas: {ventas_y_stock[juego][0]} unidades")
+    print(f"\t[+] Stock actual: {ventas_y_stock[juego][1]} unidades")
+    print(f"\t[+] Clientes que adquirieron el juego: {', '.join(clientes[juego])}")
+    
+# Punto de entrada
+def main():
+    for juego in juegos:
+        if ventas_y_stock[juego][0] > tope_ventas:
+            sumario(juego)
+        
+    print(f'\n[+] El total de ventas (sobre el tope) es de: {total_ventas_sobre_tope():,} unidades.'.replace(',', '.'))
+    
+# Calcular el total de ventas de todos los juegos
+total_ventas_sobre_tope = lambda: sum(venta for juego, (venta,_) in ventas_y_stock.items() if ventas_y_stock[juego][0] > tope_ventas)
+        
+if __name__ == '__main__':
+    main()
