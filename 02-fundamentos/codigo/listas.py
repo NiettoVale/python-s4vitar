@@ -277,6 +277,3 @@ subtitulo("Comparación de escenarios")
 print(f"  Escenario base:        {escenario_base}")
 print(f"  Escenario alternativo: {escenario_alternativo}")
 print("  -> Modificar la rama alternativa no alteró el escenario base original.")
-
-
-titulo("Fin del script")
