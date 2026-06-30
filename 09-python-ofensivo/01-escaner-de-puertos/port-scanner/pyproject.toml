@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "port-scanner"
+version = "0.0.1"
+description = "CLI para escanear puertos"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+authors = [{name = "NiettoVale"}]
+
+keywords = [
+    "python",
+    "api",
+    "automation",
+    "port scanner",
+    "cli"
+]
+
+dependencies = [
+    "typer>=0.16",
+    "rich>=14.0",
+]
+
+[project.scripts]
+port-scanner = "port_scanner.interface.cli:app"
+
